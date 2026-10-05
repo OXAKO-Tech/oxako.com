@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CONTACT_EMAIL, navLinks } from '@/lib/site-data'
+import { navLinks } from '@/lib/site-data'
 
 export function SiteFooter() {
   return (
@@ -7,15 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:flex-row sm:items-end sm:justify-between sm:px-6">
         <div className="flex flex-col gap-2">
           <p className="font-pixel text-sm text-foreground">OXAKO</p>
-          <p className="text-sm text-muted-foreground">
-            Broadcasting from somewhere far away.
-          </p>
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="text-sm text-foreground underline-offset-4 hover:text-primary hover:underline"
-          >
-            {CONTACT_EMAIL}
-          </a>
+          <p className="text-sm text-muted-foreground">Producer and Sound Designer</p>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
           <nav aria-label="Footer">

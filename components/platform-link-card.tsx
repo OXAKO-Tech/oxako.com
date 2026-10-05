@@ -1,13 +1,7 @@
-import {
-  ArrowUpRight,
-  Globe,
-  Mail,
-  Rocket,
-  type LucideIcon,
-} from 'lucide-react'
+import { ArrowUpRight, Globe, Rocket, type LucideIcon } from 'lucide-react'
 import type { LinkIcon, PlatformLink } from '@/lib/site-data'
 
-const brandLogos: Partial<Record<LinkIcon, string>> = {
+export const brandLogos: Partial<Record<LinkIcon, string>> = {
   spotify: '/brands/spotify.svg',
   apple: '/brands/apple-music.svg',
   tidal: '/brands/tidal.svg',
@@ -18,7 +12,6 @@ const brandLogos: Partial<Record<LinkIcon, string>> = {
 }
 
 const fallbackIcons: Partial<Record<LinkIcon, LucideIcon>> = {
-  email: Mail,
   landr: Rocket,
   web: Globe,
 }

@@ -1,23 +1,24 @@
 import type { Metadata } from 'next'
-import { HiddenTrack } from '@/components/hidden-track'
 import { PageHeader } from '@/components/page-header'
-import { ReleaseGrid } from '@/components/release-grid'
+import { PlatformLinkCard } from '@/components/platform-link-card'
+import { musicLinks } from '@/lib/site-data'
 
 export const metadata: Metadata = {
   title: 'Music',
-  description: 'Listen to selected OXAKO releases, projects, and previews.',
+  description: 'Listen to OXAKO on your preferred platform.',
 }
 
 export default function MusicPage() {
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-12 sm:px-6 sm:py-16">
-      <PageHeader
-        title="Music"
-        description="Listen to selected OXAKO releases, projects, and previews."
-        aside="Sounds from elsewhere."
-      />
-      <ReleaseGrid />
-      <HiddenTrack />
+    <div className="mx-auto flex max-w-4xl flex-col gap-10 px-4 py-12 sm:px-6 sm:py-16">
+      <PageHeader title="Music" description="Listen to OXAKO on your preferred platform." />
+      <ul className="grid gap-3 sm:grid-cols-2">
+        {musicLinks.map((link) => (
+          <li key={link.label}>
+            <PlatformLinkCard link={link} />
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
