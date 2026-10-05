@@ -75,11 +75,17 @@ export const releases: Release[] = [
 ]
 
 // Add the official OXAKO profile URLs here. Empty = hidden everywhere.
-export const SOCIAL_URLS: Record<'spotify' | 'apple' | 'youtube' | 'instagram', string> = {
-  spotify: '',
-  apple: '',
+export const SOCIAL_URLS: Record<
+  'spotify' | 'apple' | 'tidal' | 'iheart' | 'audiomack' | 'youtube' | 'instagram',
+  string
+> = {
+  spotify: 'https://open.spotify.com/artist/6borqbLlH9DTlXn5fCvYHR',
+  apple: 'https://music.apple.com/us/artist/oxako/1893109904',
+  tidal: 'https://tidal.com/artist/77889960',
+  iheart: 'https://www.iheart.com/artist/oxako-50387023',
+  audiomack: 'https://audiomack.com/oxako',
   youtube: '',
-  instagram: '',
+  instagram: 'https://www.instagram.com/_oxako_/',
 }
 
 // Set only when an active release or pre-save exists.
@@ -91,6 +97,9 @@ export const OXAKOPAGE_URL = ''
 export type LinkIcon =
   | 'spotify'
   | 'apple'
+  | 'tidal'
+  | 'iheart'
+  | 'audiomack'
   | 'youtube'
   | 'instagram'
   | 'email'
@@ -108,6 +117,9 @@ export type PlatformLink = {
 const allPlatformLinks: PlatformLink[] = [
   { label: 'Spotify', description: 'Stream releases', href: SOCIAL_URLS.spotify, icon: 'spotify', group: 'Listen' },
   { label: 'Apple Music', description: 'Stream releases', href: SOCIAL_URLS.apple, icon: 'apple', group: 'Listen' },
+  { label: 'Tidal', description: 'Stream releases', href: SOCIAL_URLS.tidal, icon: 'tidal', group: 'Listen' },
+  { label: 'iHeartRadio', description: 'Stream releases', href: SOCIAL_URLS.iheart, icon: 'iheart', group: 'Listen' },
+  { label: 'Audiomack', description: 'Stream releases', href: SOCIAL_URLS.audiomack, icon: 'audiomack', group: 'Listen' },
   { label: 'Latest release', description: 'LANDR promolink', href: LANDR_PROMOLINK, icon: 'landr', group: 'Listen' },
   { label: 'YouTube', description: 'New releases and updates', href: SOCIAL_URLS.youtube, icon: 'youtube', group: 'Watch and follow' },
   { label: 'Instagram', description: 'Updates and artwork', href: SOCIAL_URLS.instagram, icon: 'instagram', group: 'Watch and follow' },

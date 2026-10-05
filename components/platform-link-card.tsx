@@ -3,10 +3,13 @@ import {
   Camera,
   Disc3,
   Globe,
+  Headphones,
   Mail,
   MonitorPlay,
   Music2,
+  Radio,
   Rocket,
+  Waves,
   type LucideIcon,
 } from 'lucide-react'
 import type { LinkIcon, PlatformLink } from '@/lib/site-data'
@@ -14,6 +17,9 @@ import type { LinkIcon, PlatformLink } from '@/lib/site-data'
 const icons: Record<LinkIcon, LucideIcon> = {
   spotify: Music2,
   apple: Disc3,
+  tidal: Waves,
+  iheart: Radio,
+  audiomack: Headphones,
   youtube: MonitorPlay,
   instagram: Camera,
   email: Mail,
