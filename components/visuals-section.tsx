@@ -13,6 +13,8 @@ const followLinks = [
   { label: 'Follow on Instagram', href: SOCIAL_URLS.instagram, icon: Camera, variant: 'ghost' },
 ] as const
 
+const availableFollowLinks = followLinks.filter((link) => link.href !== '')
+
 export function VisualsSection({ variant = 'compact' }: VisualsSectionProps) {
   const isPage = variant === 'page'
   const Heading = isPage ? 'h1' : 'h2'
@@ -76,25 +78,29 @@ export function VisualsSection({ variant = 'compact' }: VisualsSectionProps) {
             >
               Visualizers, short films, and new OXAKO visual work are currently in development.
             </p>
-            <p className="text-pretty leading-relaxed text-muted-foreground">
-              Follow OXAKO on YouTube and Instagram for new releases and updates.
-            </p>
+            {availableFollowLinks.length > 0 && (
+              <p className="text-pretty leading-relaxed text-muted-foreground">
+                Follow OXAKO for new releases and updates.
+              </p>
+            )}
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            {followLinks.map(({ label, href, icon: Icon, variant: buttonVariant }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={pixelButtonClass(buttonVariant, 'min-h-12 justify-center px-5')}
-              >
-                <Icon aria-hidden="true" className="size-5" />
-                {label}
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            ))}
-          </div>
+          {availableFollowLinks.length > 0 && (
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {availableFollowLinks.map(({ label, href, icon: Icon, variant: buttonVariant }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={pixelButtonClass(buttonVariant, 'min-h-12 justify-center px-5')}
+                >
+                  <Icon aria-hidden="true" className="size-5" />
+                  {label}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

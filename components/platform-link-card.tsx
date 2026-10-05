@@ -1,8 +1,6 @@
 import {
   ArrowUpRight,
-  AudioLines,
   Camera,
-  Clapperboard,
   Disc3,
   Globe,
   Mail,
@@ -16,10 +14,8 @@ import type { LinkIcon, PlatformLink } from '@/lib/site-data'
 const icons: Record<LinkIcon, LucideIcon> = {
   spotify: Music2,
   apple: Disc3,
-  soundcloud: AudioLines,
   youtube: MonitorPlay,
   instagram: Camera,
-  tiktok: Clapperboard,
   email: Mail,
   landr: Rocket,
   web: Globe,
@@ -27,7 +23,7 @@ const icons: Record<LinkIcon, LucideIcon> = {
 
 export function PlatformLinkCard({ link }: { link: PlatformLink }) {
   const Icon = icons[link.icon]
-  const available = Boolean(link.href)
+  if (!link.href) return null
   const external = link.href.startsWith('http')
 
   const inner = (
@@ -40,29 +36,21 @@ export function PlatformLinkCard({ link }: { link: PlatformLink }) {
           {link.label}
         </span>
         <span className="truncate text-sm text-muted-foreground">
-          {available ? link.description : 'Coming soon'}
+          {link.description}
         </span>
       </span>
-      {available && (
-        <ArrowUpRight
-          className="size-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
-          aria-hidden="true"
-        />
-      )}
+      <ArrowUpRight
+        className="size-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+        aria-hidden="true"
+      />
     </span>
   )
-
-  const frame = 'group facet flex bg-border p-px transition-colors'
-
-  if (!available) {
-    return <div className={`${frame} opacity-60`}>{inner}</div>
-  }
 
   return (
     <a
       href={link.href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className={`${frame} hover:bg-primary focus-visible:bg-primary`}
+      className="group facet flex bg-border p-px transition-colors hover:bg-primary focus-visible:bg-primary"
     >
       {inner}
       {external && <span className="sr-only"> (opens in a new tab)</span>}

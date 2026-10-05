@@ -1,5 +1,6 @@
 // Replace placeholder values here. An empty string ('') for a URL means
-// "not available yet" — the UI shows "Coming soon" instead of a broken link.
+// "not available yet" — the UI hides that button/link entirely until a real
+// URL is added. Never put a generic homepage URL here as a stand-in.
 
 export const CONTACT_EMAIL = 'hello@oxako.com'
 
@@ -73,18 +74,25 @@ export const releases: Release[] = [
   },
 ]
 
-export const SOCIAL_URLS = {
-  youtube: 'https://www.youtube.com/',
-  instagram: 'https://www.instagram.com/',
-} as const
+// Add the official OXAKO profile URLs here. Empty = hidden everywhere.
+export const SOCIAL_URLS: Record<'spotify' | 'apple' | 'youtube' | 'instagram', string> = {
+  spotify: '',
+  apple: '',
+  youtube: '',
+  instagram: '',
+}
+
+// Set only when an active release or pre-save exists.
+export const LANDR_PROMOLINK = ''
+
+// Optional future link.
+export const OXAKOPAGE_URL = ''
 
 export type LinkIcon =
   | 'spotify'
   | 'apple'
-  | 'soundcloud'
   | 'youtube'
   | 'instagram'
-  | 'tiktok'
   | 'email'
   | 'landr'
   | 'web'
@@ -97,17 +105,18 @@ export type PlatformLink = {
   group: 'Listen' | 'Watch and follow' | 'Connect'
 }
 
-export const platformLinks: PlatformLink[] = [
-  { label: 'Spotify', description: 'Stream releases', href: 'https://open.spotify.com/', icon: 'spotify', group: 'Listen' },
-  { label: 'Apple Music', description: 'Stream releases', href: 'https://music.apple.com/', icon: 'apple', group: 'Listen' },
-  { label: 'SoundCloud', description: 'Demos and previews', href: 'https://soundcloud.com/', icon: 'soundcloud', group: 'Listen' },
-  { label: 'Latest release', description: 'LANDR promolink', href: '', icon: 'landr', group: 'Listen' },
+const allPlatformLinks: PlatformLink[] = [
+  { label: 'Spotify', description: 'Stream releases', href: SOCIAL_URLS.spotify, icon: 'spotify', group: 'Listen' },
+  { label: 'Apple Music', description: 'Stream releases', href: SOCIAL_URLS.apple, icon: 'apple', group: 'Listen' },
+  { label: 'Latest release', description: 'LANDR promolink', href: LANDR_PROMOLINK, icon: 'landr', group: 'Listen' },
   { label: 'YouTube', description: 'New releases and updates', href: SOCIAL_URLS.youtube, icon: 'youtube', group: 'Watch and follow' },
   { label: 'Instagram', description: 'Updates and artwork', href: SOCIAL_URLS.instagram, icon: 'instagram', group: 'Watch and follow' },
-  { label: 'TikTok', description: 'Short clips', href: 'https://www.tiktok.com/', icon: 'tiktok', group: 'Watch and follow' },
   { label: 'Email', description: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, icon: 'email', group: 'Connect' },
-  { label: 'oxakopage', description: 'More from OXAKO', href: '', icon: 'web', group: 'Connect' },
+  { label: 'oxakopage', description: 'More from OXAKO', href: OXAKOPAGE_URL, icon: 'web', group: 'Connect' },
 ]
+
+// Only links with a real URL are public.
+export const platformLinks: PlatformLink[] = allPlatformLinks.filter((link) => link.href !== '')
 
 export const navLinks = [
   { label: 'Home', href: '/' },

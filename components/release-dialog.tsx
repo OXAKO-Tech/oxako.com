@@ -101,9 +101,11 @@ export function ReleaseDialog({
                 </section>
 
                 <div className="flex flex-wrap gap-3">
-                  <ExternalOrSoon href={release.listenUrl} label="Listen" variant="primary" />
+                  {release.listenUrl && (
+                    <ExternalLink href={release.listenUrl} label="Listen" variant="primary" />
+                  )}
                   {release.videoUrl && (
-                    <ExternalOrSoon href={release.videoUrl} label="Watch Video" variant="ghost" />
+                    <ExternalLink href={release.videoUrl} label="Watch Video" variant="ghost" />
                   )}
                   <PixelButton onClick={close}>Close</PixelButton>
                 </div>
@@ -116,7 +118,7 @@ export function ReleaseDialog({
   )
 }
 
-function ExternalOrSoon({
+function ExternalLink({
   href,
   label,
   variant,
@@ -125,14 +127,6 @@ function ExternalOrSoon({
   label: string
   variant: 'primary' | 'ghost'
 }) {
-  if (!href) {
-    return (
-      <span className={pixelButtonClass(variant, 'pointer-events-none opacity-50 shadow-none')}>
-        {label}
-        <span className="font-sans text-xs normal-case">(soon)</span>
-      </span>
-    )
-  }
   return (
     <a
       href={href}

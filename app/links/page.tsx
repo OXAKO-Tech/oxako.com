@@ -5,7 +5,7 @@ import { platformLinks, type PlatformLink } from '@/lib/site-data'
 
 export const metadata: Metadata = {
   title: 'Links',
-  description: 'Find OXAKO on Spotify, Apple Music, SoundCloud, YouTube, Instagram, TikTok, and more.',
+  description: 'Official OXAKO links for listening, following, and getting in touch.',
 }
 
 const groups: PlatformLink['group'][] = ['Listen', 'Watch and follow', 'Connect']
@@ -19,6 +19,8 @@ export default function LinksPage() {
         aside="More places to explore."
       />
       {groups.map((group) => {
+        const groupLinks = platformLinks.filter((link) => link.group === group)
+        if (groupLinks.length === 0) return null
         const id = `group-${group.toLowerCase().replace(/\s+/g, '-')}`
         return (
           <section key={group} aria-labelledby={id} className="flex flex-col gap-4">
@@ -26,13 +28,11 @@ export default function LinksPage() {
               {group}
             </h2>
             <ul className="grid gap-3 sm:grid-cols-2">
-              {platformLinks
-                .filter((link) => link.group === group)
-                .map((link) => (
-                  <li key={link.label}>
-                    <PlatformLinkCard link={link} />
-                  </li>
-                ))}
+              {groupLinks.map((link) => (
+                <li key={link.label}>
+                  <PlatformLinkCard link={link} />
+                </li>
+              ))}
             </ul>
           </section>
         )
