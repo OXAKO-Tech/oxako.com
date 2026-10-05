@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { Camera, MonitorPlay } from 'lucide-react'
 import { pixelButtonClass } from '@/components/pixel-button'
 import { SOCIAL_URLS } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
@@ -9,8 +8,8 @@ type VisualsSectionProps = {
 }
 
 const followLinks = [
-  { label: 'Follow on YouTube', href: SOCIAL_URLS.youtube, icon: MonitorPlay, variant: 'primary' },
-  { label: 'Follow on Instagram', href: SOCIAL_URLS.instagram, icon: Camera, variant: 'ghost' },
+  { label: 'Follow on YouTube', href: SOCIAL_URLS.youtube, logo: '/brands/youtube.svg', variant: 'primary' },
+  { label: 'Follow on Instagram', href: SOCIAL_URLS.instagram, logo: '/brands/instagram.svg', variant: 'ghost' },
 ] as const
 
 const availableFollowLinks = followLinks.filter((link) => link.href !== '')
@@ -86,7 +85,7 @@ export function VisualsSection({ variant = 'compact' }: VisualsSectionProps) {
           </div>
           {availableFollowLinks.length > 0 && (
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              {availableFollowLinks.map(({ label, href, icon: Icon, variant: buttonVariant }) => (
+              {availableFollowLinks.map(({ label, href, logo, variant: buttonVariant }) => (
                 <a
                   key={label}
                   href={href}
@@ -94,7 +93,10 @@ export function VisualsSection({ variant = 'compact' }: VisualsSectionProps) {
                   rel="noopener noreferrer"
                   className={pixelButtonClass(buttonVariant, 'min-h-12 justify-center px-5')}
                 >
-                  <Icon aria-hidden="true" className="size-5" />
+                  <span className="flex size-7 shrink-0 items-center justify-center bg-foreground p-1">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={logo} alt="" width={20} height={20} className="size-5 object-contain" aria-hidden="true" />
+                  </span>
                   {label}
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>

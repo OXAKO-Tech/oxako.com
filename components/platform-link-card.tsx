@@ -1,41 +1,50 @@
 import {
   ArrowUpRight,
-  Camera,
-  Disc3,
   Globe,
-  Headphones,
   Mail,
-  MonitorPlay,
-  Music2,
-  Radio,
   Rocket,
-  Waves,
   type LucideIcon,
 } from 'lucide-react'
 import type { LinkIcon, PlatformLink } from '@/lib/site-data'
 
-const icons: Record<LinkIcon, LucideIcon> = {
-  spotify: Music2,
-  apple: Disc3,
-  tidal: Waves,
-  iheart: Radio,
-  audiomack: Headphones,
-  youtube: MonitorPlay,
-  instagram: Camera,
+const brandLogos: Partial<Record<LinkIcon, string>> = {
+  spotify: '/brands/spotify.svg',
+  apple: '/brands/apple-music.svg',
+  tidal: '/brands/tidal.svg',
+  iheart: '/brands/iheartradio.svg',
+  audiomack: '/brands/audiomack.svg',
+  youtube: '/brands/youtube.svg',
+  instagram: '/brands/instagram.svg',
+}
+
+const fallbackIcons: Partial<Record<LinkIcon, LucideIcon>> = {
   email: Mail,
   landr: Rocket,
   web: Globe,
 }
 
 export function PlatformLinkCard({ link }: { link: PlatformLink }) {
-  const Icon = icons[link.icon]
+  const logo = brandLogos[link.icon]
+  const FallbackIcon = fallbackIcons[link.icon] ?? Globe
   if (!link.href) return null
   const external = link.href.startsWith('http')
 
   const inner = (
     <span className="facet-inner flex min-h-20 w-full items-center gap-4 bg-card px-5 py-4">
       <span className="flex size-11 shrink-0 items-center justify-center border-2 border-border text-primary transition-colors group-hover:border-primary">
-        <Icon className="size-5" aria-hidden="true" />
+        {logo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={logo}
+            alt=""
+            width={28}
+            height={28}
+            className="size-7 object-contain"
+            aria-hidden="true"
+          />
+        ) : (
+          <FallbackIcon className="size-5" aria-hidden="true" />
+        )}
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-1">
         <span className="font-pixel text-xs leading-relaxed text-foreground">
