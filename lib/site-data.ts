@@ -73,54 +73,10 @@ export const releases: Release[] = [
   },
 ]
 
-export type Video = {
-  id: string
-  title: string
-  kind: 'Visualizer' | 'Music video' | 'Short film' | 'Experiment'
-  year: string
-  poster: string
-  posterAlt: string
-  url: string
-}
-
-export const videos: Video[] = [
-  {
-    id: 'video-01',
-    title: '[Video title]',
-    kind: 'Music video',
-    year: '2026',
-    poster: '/images/oxako-hero.webp',
-    posterAlt: 'A lone low-poly alien on a foggy plain facing a broken tower lit in blue.',
-    url: '',
-  },
-  {
-    id: 'video-02',
-    title: '[Video title]',
-    kind: 'Visualizer',
-    year: '2026',
-    poster: '/images/archive-002.webp',
-    posterAlt: 'A dark monolith over a misty lake, glowing faintly blue.',
-    url: '',
-  },
-  {
-    id: 'video-03',
-    title: '[Video title]',
-    kind: 'Short film',
-    year: '2026',
-    poster: '/images/archive-003.webp',
-    posterAlt: 'A foggy forest path leading to a small blue light.',
-    url: '',
-  },
-  {
-    id: 'video-04',
-    title: '[Video title]',
-    kind: 'Experiment',
-    year: '2026',
-    poster: '/images/archive-001.webp',
-    posterAlt: 'An alien watching a radio tower on a hill in the fog.',
-    url: '',
-  },
-]
+export const SOCIAL_URLS = {
+  youtube: 'https://www.youtube.com/',
+  instagram: 'https://www.instagram.com/',
+} as const
 
 export type LinkIcon =
   | 'spotify'
@@ -146,8 +102,8 @@ export const platformLinks: PlatformLink[] = [
   { label: 'Apple Music', description: 'Stream releases', href: 'https://music.apple.com/', icon: 'apple', group: 'Listen' },
   { label: 'SoundCloud', description: 'Demos and previews', href: 'https://soundcloud.com/', icon: 'soundcloud', group: 'Listen' },
   { label: 'Latest release', description: 'LANDR promolink', href: '', icon: 'landr', group: 'Listen' },
-  { label: 'YouTube', description: 'Videos and visualizers', href: 'https://www.youtube.com/', icon: 'youtube', group: 'Watch and follow' },
-  { label: 'Instagram', description: 'Updates and artwork', href: 'https://www.instagram.com/', icon: 'instagram', group: 'Watch and follow' },
+  { label: 'YouTube', description: 'New releases and updates', href: SOCIAL_URLS.youtube, icon: 'youtube', group: 'Watch and follow' },
+  { label: 'Instagram', description: 'Updates and artwork', href: SOCIAL_URLS.instagram, icon: 'instagram', group: 'Watch and follow' },
   { label: 'TikTok', description: 'Short clips', href: 'https://www.tiktok.com/', icon: 'tiktok', group: 'Watch and follow' },
   { label: 'Email', description: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, icon: 'email', group: 'Connect' },
   { label: 'oxakopage', description: 'More from OXAKO', href: '', icon: 'web', group: 'Connect' },
@@ -156,7 +112,6 @@ export const platformLinks: PlatformLink[] = [
 export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Music', href: '/music' },
-  { label: 'Videos', href: '/videos' },
   { label: 'Links', href: '/links' },
   { label: 'Contact', href: '/contact' },
 ] as const

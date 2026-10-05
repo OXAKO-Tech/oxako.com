@@ -102,7 +102,9 @@ export function ReleaseDialog({
 
                 <div className="flex flex-wrap gap-3">
                   <ExternalOrSoon href={release.listenUrl} label="Listen" variant="primary" />
-                  <ExternalOrSoon href={release.videoUrl} label="Watch Video" variant="ghost" />
+                  {release.videoUrl && (
+                    <ExternalOrSoon href={release.videoUrl} label="Watch Video" variant="ghost" />
+                  )}
                   <PixelButton onClick={close}>Close</PixelButton>
                 </div>
               </div>

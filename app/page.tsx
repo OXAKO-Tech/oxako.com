@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { pixelButtonClass } from '@/components/pixel-button'
+import { VisualsSection } from '@/components/visuals-section'
 import { releases } from '@/lib/site-data'
 
 const actions = [
   { label: 'Listen to Music', href: '/music', variant: 'primary' },
-  { label: 'Watch Videos', href: '/videos', variant: 'ghost' },
   { label: 'Follow OXAKO', href: '/links', variant: 'ghost' },
   { label: 'Contact', href: '/contact', variant: 'ghost' },
 ] as const
@@ -98,6 +98,10 @@ export default function HomePage() {
           ))}
         </ul>
       </section>
+
+      <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+        <VisualsSection />
+      </div>
     </>
   )
 }

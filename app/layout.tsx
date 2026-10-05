@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s — OXAKO',
   },
   description:
-    'OXAKO is a music producer and sound designer. Listen to music, watch videos, find OXAKO on streaming and social platforms, and get in touch for collaborations.',
+    'OXAKO is a music producer and sound designer. Listen to music, find OXAKO on streaming and social platforms, and get in touch for collaborations.',
   metadataBase: new URL('https://oxako.com'),
   openGraph: {
     title: 'OXAKO — Producer and Sound Designer',
