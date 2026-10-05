@@ -1,6 +1,9 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { IBM_Plex_Mono, Press_Start_2P } from 'next/font/google'
+import { CrtOverlay } from '@/components/crt-overlay'
+import { SiteFooter } from '@/components/site-footer'
+import { SiteHeader } from '@/components/site-header'
 import './globals.css'
 
 const plexMono = IBM_Plex_Mono({
@@ -18,15 +21,17 @@ const pressStart = Press_Start_2P({
 })
 
 export const metadata: Metadata = {
-  title: 'OXAKO — Signal Archive',
+  title: {
+    default: 'OXAKO — Producer and Sound Designer',
+    template: '%s — OXAKO',
+  },
   description:
-    'An interactive retro-console music archive by OXAKO. Atmospheric, cold, hypnotic. Enter the archive and tune the signal.',
+    'OXAKO is a music producer and sound designer. Listen to music, watch videos, find OXAKO on streaming and social platforms, and get in touch for collaborations.',
   metadataBase: new URL('https://oxako.com'),
   openGraph: {
-    title: 'OXAKO — Signal Archive',
-    description:
-      'Signal lost. Searching for OXAKO archive. An interactive retro-console music archive.',
-    images: ['/images/oxako-hero.png'],
+    title: 'OXAKO — Producer and Sound Designer',
+    description: 'Music, visuals, and experimental worlds.',
+    images: ['/images/oxako-hero.webp'],
   },
 }
 
@@ -47,8 +52,19 @@ export default function RootLayout({
       lang="en"
       className={`${plexMono.variable} ${pressStart.variable} bg-background`}
     >
-      <body>
-        {children}
+      <body className="flex min-h-dvh flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+        >
+          Skip to content
+        </a>
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
+        <CrtOverlay />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

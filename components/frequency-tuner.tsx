@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { TUNER } from '@/lib/archive-data'
+import { TUNER } from '@/lib/site-data'
 import { PixelButton } from '@/components/pixel-button'
 
 const { min, max, step, target, tolerance } = TUNER
@@ -12,11 +12,11 @@ function clamp(n: number) {
 }
 
 function describe(strength: number, locked: boolean) {
-  if (locked) return 'CARRIER LOCKED'
-  if (strength < 0.25) return 'STATIC'
-  if (strength < 0.55) return 'FAINT CARRIER'
-  if (strength < 0.85) return 'SIGNAL NEARBY'
-  return 'ALMOST THERE'
+  if (locked) return 'Tuned in'
+  if (strength < 0.25) return 'Static'
+  if (strength < 0.55) return 'Faint sound'
+  if (strength < 0.85) return 'Getting closer'
+  return 'Almost there'
 }
 
 export function FrequencyTuner({
@@ -49,14 +49,13 @@ export function FrequencyTuner({
   }, [])
 
   function onKeyDown(e: React.KeyboardEvent) {
-    const big = 1
     const keys: Record<string, number> = {
       ArrowRight: step,
       ArrowUp: step,
       ArrowLeft: -step,
       ArrowDown: -step,
-      PageUp: big,
-      PageDown: -big,
+      PageUp: 1,
+      PageDown: -1,
     }
     if (e.key === 'Home') {
       e.preventDefault()
@@ -73,27 +72,22 @@ export function FrequencyTuner({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-end justify-between gap-4">
-        <p
-          className="font-pixel text-xl text-primary text-glow sm:text-2xl"
-          aria-hidden="true"
-        >
+        <p className="font-pixel text-xl text-primary text-glow sm:text-2xl" aria-hidden="true">
           {value.toFixed(1)}
-          <span className="ml-2 text-xs text-muted-foreground">MHz</span>
+          <span className="ml-2 text-xs text-muted-foreground">FM</span>
         </p>
-        <p className="text-right text-sm uppercase tracking-widest text-foreground">
-          {status}
-        </p>
+        <p className="text-right text-sm font-medium text-foreground">{status}</p>
       </div>
 
       <div
         ref={trackRef}
         role="slider"
         tabIndex={0}
-        aria-label="Signal frequency"
+        aria-label="Radio dial"
         aria-valuemin={min}
         aria-valuemax={max}
         aria-valuenow={Number(value.toFixed(1))}
-        aria-valuetext={`${value.toFixed(1)} megahertz, ${status.toLowerCase()}`}
+        aria-valuetext={`${value.toFixed(1)}, ${status.toLowerCase()}`}
         onKeyDown={onKeyDown}
         onPointerDown={(e) => {
           dragging.current = true
@@ -135,17 +129,11 @@ export function FrequencyTuner({
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div
-          aria-hidden="true"
-          className="flex h-5 items-end gap-1"
-          title="Signal strength"
-        >
+        <div aria-hidden="true" className="flex h-5 items-end gap-1">
           {Array.from({ length: SEGMENTS }, (_, i) => (
             <span
               key={i}
-              className={
-                i < lit ? 'w-2 bg-primary' : 'w-2 bg-border'
-              }
+              className={i < lit ? 'w-2 bg-primary' : 'w-2 bg-border'}
               style={{ height: `${30 + (i / SEGMENTS) * 70}%` }}
             />
           ))}
@@ -153,9 +141,9 @@ export function FrequencyTuner({
         <PixelButton
           onClick={() => setValue(target)}
           disabled={unlocked}
-          aria-label="Auto-tune to the hidden signal without dragging"
+          aria-label="Auto-tune to unlock the hidden track"
         >
-          AUTO-TUNE
+          Auto-tune
         </PixelButton>
       </div>
     </div>

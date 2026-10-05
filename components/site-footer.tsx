@@ -1,32 +1,42 @@
-import { socialLinks } from '@/lib/archive-data'
+import Link from 'next/link'
+import { CONTACT_EMAIL, navLinks } from '@/lib/site-data'
 
 export function SiteFooter() {
   return (
-    <footer className="mt-10 border-t-2 border-border pt-6">
-      <nav aria-label="OXAKO links">
-        <ul className="flex flex-wrap gap-x-6 gap-y-2">
-          {socialLinks.map((link) => {
-            const external = link.href.startsWith('http')
-            return (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  {...(external
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
-                  className="inline-flex min-h-11 items-center text-sm uppercase tracking-widest text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
-                >
-                  {link.label}
-                  {external && <span className="sr-only"> (opens in a new tab)</span>}
-                </a>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
-      <p className="mt-4 text-sm uppercase tracking-widest text-muted-foreground">
-        {'Copyright © OXAKO / 2026'}
-      </p>
+    <footer className="border-t-2 border-border">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:flex-row sm:items-end sm:justify-between sm:px-6">
+        <div className="flex flex-col gap-2">
+          <p className="font-pixel text-sm text-foreground">OXAKO</p>
+          <p className="text-sm text-muted-foreground">
+            Broadcasting from somewhere far away.
+          </p>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="text-sm text-foreground underline-offset-4 hover:text-primary hover:underline"
+          >
+            {CONTACT_EMAIL}
+          </a>
+        </div>
+        <div className="flex flex-col gap-2 sm:items-end">
+          <nav aria-label="Footer">
+            <ul className="flex flex-wrap gap-x-4">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="inline-flex min-h-11 items-center text-sm text-muted-foreground hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <p className="text-sm text-muted-foreground">
+            {'© 2026 OXAKO. All rights reserved.'}
+          </p>
+        </div>
+      </div>
     </footer>
   )
 }
